@@ -35,7 +35,19 @@ class Area extends React.Component {
     let height = this.state.areaDepth/down
     var modules = []
     for(var i = 0; i < across; i++) {
-      modules.push(<this.state.type.name height={height} width={width} key={i}/>)
+      modules.push(
+        <this.state.type.name
+          key={i}
+          height={height}
+          width={width}
+          deskWidth={this.props.deskWidth}
+          deskDepth={this.props.deskDepth}
+          wallThickness={this.props.wallThickness}
+          storageDepth={this.props.storageDepth}
+          storageWidth={this.props.storageWidth}
+          storage={this.props.storage}
+        />
+      )
     }
     return (
       <React.Fragment>

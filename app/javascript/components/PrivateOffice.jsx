@@ -7,44 +7,35 @@ class PrivateOffice extends React.Component {
     super(props);
 
     this.state = {
-      deskWidth: 60,
-      deskDepth: 34,
-      wallThickness: 4,
+      deskWidth: props.deskWidth || 60,
+      deskDepth: props.deskDepth || 34,
+      wallThickness: props.wallThickness || 4,
       doorClearance: 4,
       doorSize: 36,
-      storageDepth: 12,
-      storageWidth: 72,
-      storage: 0,
-      width: props.width ? props.width : 60 + 60,
-      height: props.height ? props.height : 84 + 34,
+      storageDepth: props.storageDepth || 12,
+      storageWidth: props.storageWidth || 72,
+      storage: props.storage || 0,
+      width: props.width || 120,
+      height: props.height || 118,
     }
-
-    this.props.setHeight && this.props.setHeight(this.state.height + 2*this.state.wallThickness);
-    this.props.setWidth && this.props.setWidth(this.state.width + 2*this.state.wallThickness);
-
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(e) {
-    const target = e.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
+  componentWillReceiveProps(nextProps) {
     this.setState({
-      [name]: Number(value)
+      deskWidth: nextProps.deskWidth || 60,
+      deskDepth: nextProps.deskDepth || 34,
+      wallThickness: nextProps.wallThickness || 4,
+      storageDepth: nextProps.storageDepth || 12,
+      storageWidth: nextProps.storageWidth || 72,
+      storage: nextProps.storage || 0,
+      width: nextProps.width || 120,
+      height: nextProps.height || 118,
     }, () => {
       this.setState({
         width: this.props.width ? this.props.width : 60 + this.state.deskWidth + this.state.storage*this.state.storageDepth,
         height: this.props.height ? this.props.height : (this.state.storageWidth > 84 + this.state.deskDepth ? this.state.storageWidth : 84 + this.state.deskDepth)
-      }, () => {
-        this.props.setHeight && this.props.setHeight(this.state.height + 2*this.state.wallThickness);
-        this.props.setWidth && this.props.setWidth(this.state.width + 2*this.state.wallThickness);
       })
-    });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.width || nextProps.height) { this.setState({ width: nextProps.width, height: nextProps.height }) }
+    })
   }
 
   render() {
@@ -73,23 +64,6 @@ class PrivateOffice extends React.Component {
             <rect x={Width+off.wallThickness-off.storageDepth} y={off.wallThickness} width={off.storageDepth} height={off.storageWidth} style={{fill: 'none', stroke: 'rgb(128,128,128)', strokeWidth: 1}}/>
           }
         </svg>
-        {this.props.showMetrics &&
-          <div>
-            <form>
-              <label htmlFor="deskWidth">Desk Width: </label>
-              <input name="deskWidth" type="number" value={this.state.deskWidth} onChange={this.handleChange}/><br/>
-              <label htmlFor="deskDepth">Desk Depth: </label>
-              <input name="deskDepth" type="number" value={this.state.deskDepth} onChange={this.handleChange}/><br/>
-              <label htmlFor="wallThickness">Wall Thickness: </label>
-              <input name="wallThickness" type="number" value={this.state.wallThickness} onChange={this.handleChange}/><br/>
-              <label htmlFor="storageDepth">Storage Depth: </label>
-              <input name="storageDepth" type="number" value={this.state.storageDepth} onChange={this.handleChange}/><br/>
-              <label htmlFor="storageWidth">Storage Width: </label>
-              <input name="storageWidth" type="number" value={this.state.storageWidth} onChange={this.handleChange}/><br/>
-              <label htmlFor="storage">Storage: </label>
-              <input name="storage" type="checkbox" value={this.state.storage} onChange={this.handleChange}/>
-            </form>
-          </div> }
       </React.Fragment>
     )
   }

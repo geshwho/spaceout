@@ -12,7 +12,7 @@ class App extends React.Component {
     this.state = {
       deskWidth: 60,
       deskDepth: 34,
-      wallThickness: 4,
+      wallThickness: 4.25,
       storageDepth: 12,
       storageWidth: 72,
       storage: 0,

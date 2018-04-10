@@ -61,6 +61,8 @@ class Area extends React.Component {
           storage={this.props.storage}
           height={height}
           width={width}
+          leftWall={i==0}
+          rightWall={i==across-1}
         />
       )
     }

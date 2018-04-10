@@ -48,7 +48,7 @@ class PrivateOffice extends React.Component {
     let Height = this.state.height;
     return(
       <React.Fragment>
-        <svg height={Height+2*off.wallThickness} width={Width + off.wallThickness} style={{overflow: 'visible'}}>
+        <svg height={Height+2*off.wallThickness} width={Width + off.wallThickness} style={{overflow: 'visible'}} viewBox={this.props.setWidth ? '0 0 65 65' : ''}>
           <path d={`M 0 0
             ${off.leftWall ? 'L' : 'M'} 0 ${Height+2*off.wallThickness}
             L ${off.wallThickness+off.doorClearance} ${Height+2*off.wallThickness}

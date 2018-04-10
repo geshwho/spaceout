@@ -50,33 +50,61 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <PrivateOffice
-          setHeight={this.setHeight}
-          setWidth={this.setWidth}
-          deskWidth={this.state.deskWidth}
-          deskDepth={this.state.deskDepth}
-          wallThickness={this.state.wallThickness}
-          storageDepth={this.state.storageDepth}
-          storageWidth={this.state.storageWidth}
-          storage={this.state.storage}
-        />
-          <div>
+      <div className="container mt-5">
+        <div className="row" style={{minHeight: '275px'}}>
+          <div className="col-4">
+            <PrivateOffice
+              setHeight={this.setHeight}
+              setWidth={this.setWidth}
+              deskWidth={this.state.deskWidth}
+              deskDepth={this.state.deskDepth}
+              wallThickness={this.state.wallThickness}
+              storageDepth={this.state.storageDepth}
+              storageWidth={this.state.storageWidth}
+              storage={this.state.storage}
+            />
+          </div>
+          <div className="col-8">
             <form>
-              <label htmlFor="deskWidth">Desk Width: </label>
-              <input name="deskWidth" type="number" value={this.state.deskWidth} onChange={this.handleChange}/><br/>
-              <label htmlFor="deskDepth">Desk Depth: </label>
-              <input name="deskDepth" type="number" value={this.state.deskDepth} onChange={this.handleChange}/><br/>
-              <label htmlFor="wallThickness">Wall Thickness: </label>
-              <input name="wallThickness" type="number" value={this.state.wallThickness} onChange={this.handleChange}/><br/>
-              <label htmlFor="storageDepth">Storage Depth: </label>
-              <input name="storageDepth" type="number" value={this.state.storageDepth} onChange={this.handleChange}/><br/>
-              <label htmlFor="storageWidth">Storage Width: </label>
-              <input name="storageWidth" type="number" value={this.state.storageWidth} onChange={this.handleChange}/><br/>
-              <label htmlFor="storage">Storage: </label>
-              <input name="storage" type="checkbox" value={this.state.storage} onChange={this.handleChange}/>
+              <div className="form-group row mb-0">
+                <label htmlFor="deskWidth" className="col-sm-2 col-form-label">Desk Width: </label>
+                <div className="col-sm-4">
+                  <input name="deskWidth" className="form-control" type="number" value={this.state.deskWidth} onChange={this.handleChange}/><br/>
+                </div>
+              </div>
+              <div className="form-group row mb-0">
+                <label htmlFor="deskDepth" className="col-sm-2 col-form-label">Desk Depth: </label>
+                <div className="col-sm-4">
+                  <input name="deskDepth" className="form-control" type="number" value={this.state.deskDepth} onChange={this.handleChange}/><br/>
+                </div>
+              </div>
+              <div className="form-group row mb-0">
+                <label htmlFor="wallThickness" className="col-sm-2 col-form-label">Wall Thickness: </label>
+                <div className="col-sm-4">
+                  <input name="wallThickness" className="form-control" type="number" value={this.state.wallThickness} onChange={this.handleChange}/><br/>
+                </div>
+              </div>
+              <div className="form-group row mb-0">
+                <label htmlFor="storageDepth" className="col-sm-2 col-form-label">Storage Depth: </label>
+                <div className="col-sm-4">
+                  <input name="storageDepth" className="form-control" type="number" value={this.state.storageDepth} onChange={this.handleChange}/><br/>
+                </div>
+              </div>
+              <div className="form-group row mb-0">
+                <label htmlFor="storageWidth" className="col-sm-2 col-form-label">Storage Width: </label>
+                <div className="col-sm-4">
+                  <input name="storageWidth" className="form-control" type="number" value={this.state.storageWidth} onChange={this.handleChange}/><br/>
+                </div>
+              </div>
+              <div className="form-group row mb-0">
+                <label htmlFor="storage" className="col-sm-2 col-form-label">Storage: </label>
+                <div className="col-sm-4">
+                  <input name="storage" className="form-check-label" type="checkbox" value={this.state.storage} onChange={this.handleChange}/>
+                </div>
+              </div>
             </form>
           </div>
+        </div>
         <br/>
           <Area
             deskWidth={this.state.deskWidth}

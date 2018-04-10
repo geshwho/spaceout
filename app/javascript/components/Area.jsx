@@ -4,13 +4,17 @@ import PropTypes from 'prop-types'
 import PrivateOffice from './PrivateOffice'
 
 class Area extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       areaWidth: 600,
-      areaDepth: 125,
-      type: { name: PrivateOffice, minWidth: 120, minHeight: 118 }
+      areaDepth: 126,
+      type: {
+        name: PrivateOffice,
+        minWidth: this.props.width || 120,
+        minHeight: this.props.height || 118
+      }
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -28,11 +32,20 @@ class Area extends React.Component {
     )
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      type: {
+        name: PrivateOffice,
+        minWidth: nextProps.width || 120,
+        minHeight: nextProps.height || 120
+      }
+    })
+  }
+
   render() {
     let across = Math.floor(this.state.areaWidth/this.state.type.minWidth);
-    let width = this.state.areaWidth/across
-    let down = Math.floor(this.state.areaDepth/this.state.type.minHeight);
-    let height = this.state.areaDepth/down
+    let width = this.state.areaWidth/across;
+    let height = this.state.areaDepth;
     var modules = []
     for(var i = 0; i < across; i++) {
       modules.push(
@@ -46,6 +59,8 @@ class Area extends React.Component {
           storageDepth={this.props.storageDepth}
           storageWidth={this.props.storageWidth}
           storage={this.props.storage}
+          height={height}
+          width={width}
         />
       )
     }

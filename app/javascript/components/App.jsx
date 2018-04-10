@@ -78,16 +78,16 @@ class App extends React.Component {
             </form>
           </div>
         <br/>
-        <Area
-          deskWidth={this.state.deskWidth}
-          deskDepth={this.state.deskDepth}
-          wallThickness={this.state.wallThickness}
-          storageDepth={this.state.storageDepth}
-          storageWidth={this.state.storageWidth}
-          storage={this.state.storage}
-          height={this.state.height}
-          width={this.state.width}
-        />
+          <Area
+            deskWidth={this.state.deskWidth}
+            deskDepth={this.state.deskDepth}
+            wallThickness={this.state.wallThickness}
+            storageDepth={this.state.storageDepth}
+            storageWidth={this.state.storageWidth}
+            storage={this.state.storage}
+            height={this.state.height}
+            width={this.state.width}
+          />
       </div>
     )
   }

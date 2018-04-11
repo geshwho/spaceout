@@ -19,6 +19,7 @@ class PrivateOffice extends React.Component {
       height: props.height || 118,
       rightWall: props.rightWall==undefined ? true : props.rightWall,
       leftWall: props.leftWall==undefined ? true : props.leftWall,
+      topWall: props.topWall==undefined ? true : props.topWall,
     }
   }
 
@@ -34,6 +35,7 @@ class PrivateOffice extends React.Component {
       height: nextProps.height || 118,
       rightWall: nextProps.rightWall==undefined ? true : nextProps.rightWall,
       leftWall: nextProps.leftWall==undefined ? true : nextProps.leftWall,
+      topWall: nextProps.topWall==undefined ? true : nextProps.topWall,
     }, () => {
       this.setState({
         width: this.props.width ? this.props.width : 60 + this.state.deskWidth + this.state.storage*this.state.storageDepth,
@@ -48,9 +50,10 @@ class PrivateOffice extends React.Component {
     let Height = this.state.height;
     return(
       <React.Fragment>
-        <svg height={Height+2*off.wallThickness} width={Width + off.wallThickness} style={{overflow: 'visible'}} viewBox={this.props.setWidth ? '0 0 65 65' : ''}>
+        <svg height={Height+2*off.wallThickness} width={Width + off.wallThickness} style={{overflow: 'visible'}} viewBox={this.props.setWidth ? `0 0 ${(Width+2*off.wallThickness)/2} ${(Height+2*off.wallThickness)/2}` : ''}>
           <path d={`M 0 0
             ${off.leftWall ? 'L' : 'M'} 0 ${Height+2*off.wallThickness}
+            ${off.leftWall ? 'L' : 'M'} ${off.wallThickness} ${Height+2*off.wallThickness}
             L ${off.wallThickness+off.doorClearance} ${Height+2*off.wallThickness}
             L ${off.wallThickness+off.doorClearance} ${Height+off.wallThickness}
             L ${off.wallThickness} ${Height+off.wallThickness}
@@ -60,15 +63,16 @@ class PrivateOffice extends React.Component {
             L ${off.doorSize+off.wallThickness+off.doorClearance} ${Height+off.wallThickness}
             L ${off.doorSize+off.wallThickness+off.doorClearance} ${Height+2*off.wallThickness}
             L ${Width+2*off.wallThickness} ${Height+2*off.wallThickness}
-            ${off.rightWall ? 'L' : 'M'} ${Width+2*off.wallThickness} ${0}
-            L ${0} ${0}`}
-            style={{fill: 'none', stroke: 'black', strokeWidth: 1.5}}/>
-          <rect x={off.wallThickness+off.doorClearance} y={off.wallThickness+Height-off.doorSize} width={1.5} height={off.doorSize} style={{fill: 'none', stroke: 'black', strokeWidth: 1}}/>
-          <path d={`M ${off.wallThickness+off.doorClearance} ${off.wallThickness+Height-off.doorSize} A ${off.doorSize} ${off.doorSize}, 0, 0, 1, ${off.doorSize+off.wallThickness+off.doorClearance} ${Height+off.wallThickness}`} style={{fill: 'none', stroke: 'black', strokeWidth: .5}}/>
-          <rect x={(Width-off.deskWidth-off.storage*off.storageDepth)/2+off.wallThickness} y={48+off.wallThickness} width={off.deskWidth} height={off.deskDepth} style={{fill: 'none', stroke: 'black', strokeWidth: .5}}/>
-          <path d={`M ${off.wallThickness+(Width-off.storage*off.storageDepth)/2} ${46+off.wallThickness} l 7 0 l 3 -1 l 1 -3 l -2 -12 l -6 -2 l -6 0 l -6 2 l -2 12 l 1 3 l 3 1 l 7 0 m 9 -16 l -1 3 l -5 -1 l -6 0 l -5 1 l -1 -3`} style={{fill: 'none', stroke: 'black', strokeWidth: .5}}/>
+            ${off.rightWall ? 'L' : 'M'} ${Width+2*off.wallThickness} ${off.wallThickness}
+            ${off.rightWall&&off.topWall ? 'L' : 'M'} ${Width+2*off.wallThickness} ${0}
+            ${off.topWall ? 'L' : 'M'} ${0} ${0}`}
+            style={{fill: 'none', stroke: 'black', strokeWidth: 1.25}}/>
+          <rect x={off.wallThickness+off.doorClearance} y={off.wallThickness+Height-off.doorSize} width={1.5} height={off.doorSize} style={{fill: 'none', stroke: 'black', strokeWidth: .5}}/>
+          <path d={`M ${off.wallThickness+off.doorClearance} ${off.wallThickness+Height-off.doorSize} A ${off.doorSize} ${off.doorSize}, 0, 0, 1, ${off.doorSize+off.wallThickness+off.doorClearance} ${Height+off.wallThickness}`} style={{fill: 'none', stroke: 'black', strokeWidth: .25}}/>
+          <rect x={(Width-off.deskWidth-off.storage*off.storageDepth)/2+off.wallThickness} y={48+off.wallThickness} width={off.deskWidth} height={off.deskDepth} style={{fill: 'none', stroke: 'black', strokeWidth: .25}}/>
+          <path d={`M ${off.wallThickness+(Width-off.storage*off.storageDepth)/2} ${46+off.wallThickness} l 7 0 l 3 -1 l 1 -3 l -2 -12 l -6 -2 l -6 0 l -6 2 l -2 12 l 1 3 l 3 1 l 7 0 m 9 -16 l -1 3 l -5 -1 l -6 0 l -5 1 l -1 -3`} style={{fill: 'none', stroke: 'black', strokeWidth: .25}}/>
           { off.storage &&
-            <rect x={Width+off.wallThickness-off.storageDepth} y={off.wallThickness} width={off.storageDepth} height={off.storageWidth} style={{fill: 'none', stroke: 'black', strokeWidth: .5}}/>
+            <rect x={Width+off.wallThickness-off.storageDepth} y={off.wallThickness} width={off.storageDepth} height={off.storageWidth} style={{fill: 'none', stroke: 'black', strokeWidth: .25}}/>
           }
         </svg>
       </React.Fragment>

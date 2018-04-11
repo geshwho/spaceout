@@ -74,24 +74,26 @@ class Area extends React.Component {
       <React.Fragment>
         <div className='col-sm-4'>
           <h5 className="mb-5">Space Summary</h5>
-          <div className="form-group row">
-            <label htmlFor="areaWidth" className="col-sm-6">Area Width: </label>
-            <input name="areaWidth" type="number" value={this.state.areaWidth} onChange={this.handleChange} className="form-control col-sm-6"/><br/>
-          </div>
-          {/* <label htmlFor="areaDepth">Area Depth: </label>
-          <input name="areaDepth" type="number" value={this.state.areaDepth} onChange={this.handleChange}/><br/> */}
-          <div className="row">
-            <div className="col-sm-6">Reported Width:</div>
-            <div className="col-sm-6">{width.toFixed(2)}"</div>
-          </div>
-          <div className="row">
-            <div className="col-sm-6">Reported Depth:</div>
-            <div className="col-sm-6">{(height-2*this.props.wallThickness).toFixed(2)}"</div>
-          </div>
-          <div className="row">
-            <div className="col-sm-6">Reported Area:</div>
-            <div className="col-sm-6">{(width*height/144).toFixed(2)} sq ft</div>
-          </div>
+          <form>
+            <div className="form-group row">
+              <label htmlFor="areaWidth" className="col-sm-6">Area Width: </label>
+              <input name="areaWidth" type="number" value={this.state.areaWidth} onChange={this.handleChange} className="form-control col-sm-5"/><br/>
+            </div>
+            {/* <label htmlFor="areaDepth">Area Depth: </label>
+            <input name="areaDepth" type="number" value={this.state.areaDepth} onChange={this.handleChange}/><br/> */}
+            <div className="row">
+              <div className="col-sm-6">Reported Width:</div>
+              <div className="col-sm-6">{width.toFixed(2)}"</div>
+            </div>
+            <div className="row">
+              <div className="col-sm-6">Reported Depth:</div>
+              <div className="col-sm-6">{(height-2*this.props.wallThickness).toFixed(2)}"</div>
+            </div>
+            <div className="row">
+              <div className="col-sm-6">Reported Area:</div>
+              <div className="col-sm-6">{(width*height/144).toFixed(2)} sq ft</div>
+            </div>
+          </form>
         </div>
         <div className="my-2 mt-5 pt-5 col-sm-12">
           <img src={Background} style={{position: 'absolute', zIndex: '-1', top: '-136px', left: '-65px', height: 'auto', width: '119%'}}/>

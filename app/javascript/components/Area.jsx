@@ -10,7 +10,7 @@ class Area extends React.Component {
 
     this.state = {
       areaWidth: 600,
-      areaDepth: 126.5,
+      areaDepth: 118,
       type: {
         name: PrivateOffice,
         minWidth: this.props.width || 120,

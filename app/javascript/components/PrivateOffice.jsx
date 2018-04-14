@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+import Chair from './Chair'
+import Dimension from './Dimension'
 
 class PrivateOffice extends React.Component {
   constructor(props) {
@@ -70,7 +72,7 @@ class PrivateOffice extends React.Component {
         <g style={{fill: 'none', stroke: 'black', strokeWidth: .25}}>
           <path d={`M ${off.wallThickness+off.doorClearance} ${off.wallThickness+Height-off.doorSize} A ${off.doorSize} ${off.doorSize}, 0, 0, 1, ${off.doorSize+off.wallThickness+off.doorClearance} ${Height+off.wallThickness}`}/>
           <rect x={(Width-off.deskWidth-off.storage*off.storageDepth)/2+off.wallThickness} y={48+off.wallThickness} width={off.deskWidth} height={off.deskDepth}/>
-          <path d={`M ${off.wallThickness+(Width-off.storage*off.storageDepth)/2} ${46+off.wallThickness} l 7 0 l 3 -1 l 1 -3 l -2 -12 l -6 -2 l -6 0 l -6 2 l -2 12 l 1 3 l 3 1 l 7 0 m 9 -16 l -1 3 l -5 -1 l -6 0 l -5 1 l -1 -3`}/>
+          <Chair x={off.wallThickness+(Width-off.storage*off.storageDepth)/2} y={46+off.wallThickness}/>
         </g>
         { off.storage &&
           <rect x={Width+off.wallThickness-off.storageDepth} y={off.wallThickness} width={off.storageDepth} height={off.storageWidth} style={{fill: 'none', stroke: 'black', strokeWidth: .25}}/>
@@ -100,13 +102,14 @@ class PrivateOffice extends React.Component {
 
 const MainDimensions = props => (
   <g>
-    <line x1={props.wallThickness} y1={2} x2={props.wallThickness} y2={-15-props.wallThickness} style={{fill: 'none', stroke: 'black', strokeWidth: .25}}/>
+    {/* <line x1={props.wallThickness} y1={2} x2={props.wallThickness} y2={-15-props.wallThickness} style={{fill: 'none', stroke: 'black', strokeWidth: .25}}/>
     <line x1={props.wallThickness+props.width} y1={2} x2={props.wallThickness+props.width} y2={-15-props.wallThickness} style={{fill: 'none', stroke: 'black', strokeWidth: .25}}/>
     <line x1={0} y1={-15} x2={2*props.wallThickness+props.width} y2={-15} style={{fill: 'none', stroke: 'black', strokeWidth: .25}}/>
     <line x1={props.wallThickness/2} y1={-15+props.wallThickness/2} x2={props.wallThickness+props.wallThickness/2} y2={-15-props.wallThickness/2} style={{fill: 'none', stroke: 'black', strokeWidth: 1}}/>
     <line x1={props.wallThickness+props.width-(props.wallThickness/2)} y1={-15+props.wallThickness/2} x2={props.wallThickness+props.width+(props.wallThickness/2)} y2={-15-props.wallThickness/2} style={{fill: 'none', stroke: 'black', strokeWidth: 1}}/>
     <text x={props.width/2-2} y={-17} style={{fontSize: '6'}}>{props.width.toFixed(2)}"</text>
-    <text x={props.width/2-18} y={-8} style={{fontSize: '6'}}>{!props.inArea && 'Minimum'} Width</text>
+    <text x={props.width/2-18} y={-8} style={{fontSize: '6'}}>{!props.inArea && 'Minimum'} Width</text> */}
+    <Dimension x1={props.wallThickness} y1={48+props.wallThickness} x2={props.wallThickness+props.width} y2={0} offset={15}/>
 
     <line x1={2} y1={props.wallThickness} x2={-15-props.wallThickness} y2={props.wallThickness} style={{fill: 'none', stroke: 'black', strokeWidth: .25}}/>
     <line x1={2} y1={props.wallThickness+props.height} x2={-15-props.wallThickness} y2={props.wallThickness+props.height} style={{fill: 'none', stroke: 'black', strokeWidth: .25}}/>

@@ -10,6 +10,22 @@ class App extends React.Component {
     super();
 
     this.state = {
+      modules: [
+        {
+          name: PrivateOffice,
+          human_name: 'Private Office',
+          minWidth: 120,
+          minHeight: 118,
+          deskWidth: 60,
+          deskDepth: 34,
+          wallThickness: 4.25,
+          storageDepth: 12,
+          storageWidth: 72,
+          storage: 0,
+          height: 126.5,
+          width: 128
+        }
+      ],
       deskWidth: 60,
       deskDepth: 34,
       wallThickness: 4.25,
@@ -49,10 +65,16 @@ class App extends React.Component {
   }
 
   render() {
+    const modules = this.state.modules.map((mod, i) =>
+      <p key={i} className="cursor-pointer">{mod.human_name}</p>
+    );
     return (
       <div className="container mt-5">
-        <div className="row" style={{minHeight: '325px'}}>
-          <div className="col-4">
+        <div className="row mb-5">
+          <div className="col-sm-4">
+            {modules}
+          </div>
+          <div className="col-sm-4">
             <PrivateOffice
               setHeight={this.setHeight}
               setWidth={this.setWidth}
@@ -64,7 +86,7 @@ class App extends React.Component {
               storage={this.state.storage}
             />
           </div>
-          <div className="col-4">
+          <div className="col-sm-4">
             <h5 className="mb-5">Design Parameters</h5>
             <form>
               <div className="form-group row" style={{marginBottom: '-12px'}}>
@@ -105,7 +127,6 @@ class App extends React.Component {
               </div>
             </form>
           </div>
-        <br/>
           <Area
             deskWidth={this.state.deskWidth}
             deskDepth={this.state.deskDepth}

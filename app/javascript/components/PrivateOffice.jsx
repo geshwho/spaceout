@@ -83,6 +83,7 @@ class PrivateOffice extends React.Component {
             width={Width}
             height={Height}
             inArea={!this.props.setWidth}
+            deskWidth={off.deskWidth}
           /> }
         { this.props.setWidth &&
           <Clearances
@@ -102,50 +103,17 @@ class PrivateOffice extends React.Component {
 
 const MainDimensions = props => (
   <g>
-    {/* <line x1={props.wallThickness} y1={2} x2={props.wallThickness} y2={-15-props.wallThickness} style={{fill: 'none', stroke: 'black', strokeWidth: .25}}/>
-    <line x1={props.wallThickness+props.width} y1={2} x2={props.wallThickness+props.width} y2={-15-props.wallThickness} style={{fill: 'none', stroke: 'black', strokeWidth: .25}}/>
-    <line x1={0} y1={-15} x2={2*props.wallThickness+props.width} y2={-15} style={{fill: 'none', stroke: 'black', strokeWidth: .25}}/>
-    <line x1={props.wallThickness/2} y1={-15+props.wallThickness/2} x2={props.wallThickness+props.wallThickness/2} y2={-15-props.wallThickness/2} style={{fill: 'none', stroke: 'black', strokeWidth: 1}}/>
-    <line x1={props.wallThickness+props.width-(props.wallThickness/2)} y1={-15+props.wallThickness/2} x2={props.wallThickness+props.width+(props.wallThickness/2)} y2={-15-props.wallThickness/2} style={{fill: 'none', stroke: 'black', strokeWidth: 1}}/>
-    <text x={props.width/2-2} y={-17} style={{fontSize: '6'}}>{props.width.toFixed(2)}"</text>
-    <text x={props.width/2-18} y={-8} style={{fontSize: '6'}}>{!props.inArea && 'Minimum'} Width</text> */}
-    <Dimension x1={props.wallThickness} y1={48+props.wallThickness} x2={props.wallThickness+props.width} y2={0} offset={15}/>
-
-    <line x1={2} y1={props.wallThickness} x2={-15-props.wallThickness} y2={props.wallThickness} style={{fill: 'none', stroke: 'black', strokeWidth: .25}}/>
-    <line x1={2} y1={props.wallThickness+props.height} x2={-15-props.wallThickness} y2={props.wallThickness+props.height} style={{fill: 'none', stroke: 'black', strokeWidth: .25}}/>
-    <line x1={-15} y1={0} x2={-15} y2={2*props.wallThickness+props.height} style={{fill: 'none', stroke: 'black', strokeWidth: .25}}/>
-    <line x1={-15+props.wallThickness/2} y1={props.wallThickness/2} x2={-15-props.wallThickness/2} y2={props.wallThickness+props.wallThickness/2} style={{fill: 'none', stroke: 'black', strokeWidth: 1}}/>
-    <line x1={-15+props.wallThickness/2} y1={props.wallThickness+props.height-(props.wallThickness/2)} x2={-15-props.wallThickness/2} y2={props.wallThickness+props.height+(props.wallThickness/2)} style={{fill: 'none', stroke: 'black', strokeWidth: 1}}/>
-    <text x={-17} y={props.height/2+12} transform={`rotate(-90 -17,${props.height/2+12})`} style={{fontSize: '6'}}>{props.height.toFixed(2)}"</text>
-    <text x={-8} y={props.height/2+26} transform={`rotate(-90 -8,${props.height/2+26})`} style={{fontSize: '6'}}>{!props.inArea && 'Minimum'} Depth</text>
+    <Dimension x1={props.wallThickness} y1={0} x2={props.wallThickness+props.width} y2={0} offset={true} text="Minimum Width"/>
+    <Dimension x1={0} y1={props.wallThickness} x2={0} y2={props.wallThickness+props.height} offset={true} text="Minimum Depth"/>
   </g>
 )
 
 const Clearances = props => (
   <g>
-    <line x1={0} y1={48+props.deskDepth/2} x2={(props.width-props.deskWidth-props.storage*props.storageDepth)/2+2*props.wallThickness} y2={48+props.deskDepth/2} style={{fill: 'none', stroke: 'black', strokeWidth: .25}}/>
-    <line x1={0+props.wallThickness/2} y1={48+props.deskDepth/2+props.wallThickness/2} x2={0+3*props.wallThickness/2} y2={48+props.deskDepth/2-props.wallThickness/2} style={{fill: 'none', stroke: 'black', strokeWidth: 1}}/>
-    <line x1={(props.width-props.deskWidth-props.storage*props.storageDepth)/2+props.wallThickness/2} y1={48+props.deskDepth/2+props.wallThickness/2} x2={(props.width-props.deskWidth-props.storage*props.storageDepth)/2+3*props.wallThickness/2} y2={48+props.deskDepth/2-props.wallThickness/2} style={{fill: 'none', stroke: 'black', strokeWidth: 1}}/>
-    <text x={(props.width-props.deskWidth-props.storage*props.storageDepth)/4+props.wallThickness/2} y={44+props.deskDepth/2} style={{fontSize: '6'}}>{(props.width-props.deskWidth-props.storage*props.storageDepth)/2}"</text>
-    <text x={(props.width-props.deskWidth-props.storage*props.storageDepth)/4+props.wallThickness/2-11} y={55+props.deskDepth/2} style={{fontSize: '6'}}>Clearance</text>
-
-    <line x1={(props.width+props.deskWidth-props.storage*props.storageDepth)/2} y1={48+props.deskDepth/2} x2={props.width+2*props.wallThickness-props.storage*props.storageDepth} y2={48+props.deskDepth/2} style={{fill: 'none', stroke: 'black', strokeWidth: .25}}/>
-    <line x1={(props.width+props.deskWidth-props.storage*props.storageDepth+props.wallThickness)/2} y1={48+props.deskDepth/2+props.wallThickness/2} x2={(props.width+props.deskWidth-props.storage*props.storageDepth+3*props.wallThickness)/2} y2={48+props.deskDepth/2-props.wallThickness/2} style={{fill: 'none', stroke: 'black', strokeWidth: 1}}/>
-    <line x1={props.width+props.wallThickness/2-props.storage*props.storageDepth} y1={48+props.deskDepth/2+props.wallThickness/2} x2={props.width+3*props.wallThickness/2-props.storage*props.storageDepth} y2={48+props.deskDepth/2-props.wallThickness/2} style={{fill: 'none', stroke: 'black', strokeWidth: 1}}/>
-    <text x={40+props.deskWidth+props.wallThickness} y={44+props.deskDepth/2} style={{fontSize: '6'}}>{(props.width-props.deskWidth-props.storage*props.storageDepth)/2}"</text>
-    <text x={31+props.deskWidth+props.wallThickness} y={55+props.deskDepth/2} style={{fontSize: '6'}}>Clearance</text>
-
-    <line x1={40+props.wallThickness} y1={0} x2={40+props.wallThickness} y2={48+2*props.wallThickness} style={{fill: 'none', stroke: 'black', strokeWidth: .25}}/>
-    <line x1={40+props.wallThickness/2} y1={3*props.wallThickness/2} x2={40+3*props.wallThickness/2} y2={props.wallThickness/2} style={{fill: 'none', stroke: 'black', strokeWidth: 1}}/>
-    <line x1={40+props.wallThickness/2} y1={48+5*props.wallThickness/2} x2={40+3*props.wallThickness/2} y2={48+3*props.wallThickness/2} style={{fill: 'none', stroke: 'black', strokeWidth: 1}}/>
-    <text x={36+props.wallThickness} y={34} transform={`rotate(-90 ${36+props.wallThickness},34)`} style={{fontSize: '6'}}>48"</text>
-    <text x={47+props.wallThickness} y={40} transform={`rotate(-90 ${47+props.wallThickness},40)`} style={{fontSize: '6'}}>Clearance</text>
-
-    <line x1={props.doorSize+props.wallThickness+30} y1={48+props.deskDepth} x2={props.doorSize+props.wallThickness+30} y2={props.height+2*props.wallThickness} style={{fill: 'none', stroke: 'black', strokeWidth: .25}}/>
-    <line x1={props.doorSize+props.wallThickness/2+30} y1={48+props.deskDepth+3*props.wallThickness/2} x2={props.doorSize+3*props.wallThickness/2+30} y2={48+props.deskDepth+props.wallThickness/2} style={{fill: 'none', stroke: 'black', strokeWidth: 1}}/>
-    <line x1={props.doorSize+props.wallThickness/2+30} y1={props.height+3*props.wallThickness/2} x2={props.doorSize+3*props.wallThickness/2+30} y2={props.height+props.wallThickness/2} style={{fill: 'none', stroke: 'black', strokeWidth: 1}}/>
-    <text x={props.doorSize+props.wallThickness+29} y={76+props.deskDepth} transform={`rotate(-90 ${props.doorSize+props.wallThickness+29},${76+props.deskDepth})`} style={{fontSize: '6'}}>48"</text>
-    <text x={props.doorSize+props.wallThickness+36} y={84+props.deskDepth} transform={`rotate(-90 ${props.doorSize+props.wallThickness+36},${84+props.deskDepth})`} style={{fontSize: '6'}}>Clearance</text>
+    <Dimension x1={props.wallThickness} x2={(props.width-props.deskWidth-props.storage*props.storageDepth)/2+props.wallThickness} y1={48+props.deskDepth/2+props.wallThickness} y2={48+props.deskDepth/2+props.wallThickness} text="Clearance"/>
+    <Dimension x1={(props.width+props.deskWidth-props.storage*props.storageDepth)/2+props.wallThickness} x2={props.width+props.wallThickness-props.storage*props.storageDepth} y1={48+props.deskDepth/2+props.wallThickness} y2={48+props.deskDepth/2+props.wallThickness} text="Clearance"/>
+    <Dimension x1={40+props.wallThickness} x2={40+props.wallThickness} y1={props.wallThickness} y2={props.wallThickness+48} text="Clearance"/>
+    <Dimension x1={props.doorSize+props.wallThickness+30} x2={props.doorSize+props.wallThickness+30} y1={48+props.deskDepth+props.wallThickness} y2={props.height+props.wallThickness} text="Clearance"/>
   </g>
 )
 

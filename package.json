@@ -4,8 +4,11 @@
   "dependencies": {
     "@rails/webpacker": "3.4",
     "babel-preset-react": "^6.24.1",
+    "immutability-helper": "^2.6.6",
     "prop-types": "^15.6.1",
     "react": "^16.3.1",
+    "react-dnd": "^2.6.0",
+    "react-dnd-html5-backend": "^2.6.0",
     "react-dom": "^16.3.1"
   },
   "devDependencies": {

@@ -3,17 +3,21 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import PrivateOffice from './PrivateOffice'
 import Area from './Area'
+import ModuleDrag from './ModuleDrag'
+import CustomDragLayer from './CustomDragLayer'
 import '../stylesheets/main.css';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+import update from 'immutability-helper';
 
 class App extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      modules: [
-        {
+      modules: {
+        'Private Office': {
           name: PrivateOffice,
-          human_name: 'Private Office',
           minWidth: 120,
           minHeight: 118,
           deskWidth: 60,
@@ -22,10 +26,11 @@ class App extends React.Component {
           storageDepth: 12,
           storageWidth: 72,
           storage: 0,
-          height: 126.5,
-          width: 128
+          height: 118,
+          width: 120
         }
-      ],
+      },
+      currentModule: 'Private Office',
       deskWidth: 60,
       deskDepth: 34,
       wallThickness: 4.25,
@@ -54,19 +59,32 @@ class App extends React.Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    this.setState({
-      [name]: Number(value)
-    }, () => {
-      this.setState({
-        height: (this.state.storageWidth > 84 + this.state.deskDepth ? this.state.storageWidth : 84 + this.state.deskDepth) + 2*this.state.wallThickness,
-        width: 60 + this.state.deskWidth + this.state.storage*this.state.storageDepth + 2*this.state.wallThickness,
-      })
+    const newState = update(this.state, {
+      modules: {
+        [this.state.currentModule]: {
+          [name]: { $set: Number(value) }
+        }
+      }
+    });
+
+    this.setState(
+      newState, () => {
+        const modprops = this.state.modules[this.state.currentModule]
+        const newDims = update(this.state, {
+          modules: {
+            [this.state.currentModule]: {
+              height: { $set: (modprops.storageWidth > 84 + modprops.deskDepth ? modprops.storageWidth : 84 + modprops.deskDepth) },
+              width: { $set: 60 + modprops.deskWidth + modprops.storage*modprops.storageDepth }
+            }
+          }
+        });
+        this.setState(newDims)
     });
   }
 
   render() {
-    const modules = this.state.modules.map((mod, i) =>
-      <p key={i} className="cursor-pointer">{mod.human_name}</p>
+    const modules = Object.keys(this.state.modules).map((mod, i) =>
+      <div key={i} className="cursor-pointer"><ModuleDrag name={this.state.modules[`${mod}`].name} human_name={mod} {...this.state.modules[`${mod}`]}/></div>
     );
     return (
       <div className="container mt-5">
@@ -74,16 +92,11 @@ class App extends React.Component {
           <div className="col-sm-4">
             {modules}
           </div>
-          <div className="col-sm-4">
+          <div className="col-sm-4 pt-4">
             <PrivateOffice
               setHeight={this.setHeight}
               setWidth={this.setWidth}
-              deskWidth={this.state.deskWidth}
-              deskDepth={this.state.deskDepth}
-              wallThickness={this.state.wallThickness}
-              storageDepth={this.state.storageDepth}
-              storageWidth={this.state.storageWidth}
-              storage={this.state.storage}
+              {...this.state.modules[this.state.currentModule]}
             />
           </div>
           <div className="col-sm-4">
@@ -92,37 +105,37 @@ class App extends React.Component {
               <div className="form-group row" style={{marginBottom: '-12px'}}>
                 <label htmlFor="deskWidth" className="col-sm-5 col-form-label">Desk Width: </label>
                 <div className="col-sm-5">
-                  <input name="deskWidth" className="form-control" type="number" value={this.state.deskWidth} onChange={this.handleChange}/><br/>
+                  <input name="deskWidth" className="form-control" type="number" value={this.state.modules['Private Office'].deskWidth} onChange={this.handleChange}/><br/>
                 </div>
               </div>
               <div className="form-group row" style={{marginBottom: '-12px'}}>
                 <label htmlFor="deskDepth" className="col-sm-5 col-form-label">Desk Depth: </label>
                 <div className="col-sm-5">
-                  <input name="deskDepth" className="form-control" type="number" value={this.state.deskDepth} onChange={this.handleChange}/><br/>
+                  <input name="deskDepth" className="form-control" type="number" value={this.state.modules['Private Office'].deskDepth} onChange={this.handleChange}/><br/>
                 </div>
               </div>
               <div className="form-group row" style={{marginBottom: '-12px'}}>
                 <label htmlFor="wallThickness" className="col-sm-5 col-form-label">Wall Thickness: </label>
                 <div className="col-sm-5">
-                  <input name="wallThickness" className="form-control" type="number" value={this.state.wallThickness} onChange={this.handleChange}/><br/>
+                  <input name="wallThickness" className="form-control" type="number" value={this.state.modules['Private Office'].wallThickness} onChange={this.handleChange}/><br/>
                 </div>
               </div>
               <div className="form-group row" style={{marginBottom: '-12px'}}>
                 <label htmlFor="storageDepth" className="col-sm-5 col-form-label">Storage Depth: </label>
                 <div className="col-sm-5">
-                  <input name="storageDepth" className="form-control" type="number" value={this.state.storageDepth} onChange={this.handleChange}/><br/>
+                  <input name="storageDepth" className="form-control" type="number" value={this.state.modules['Private Office'].storageDepth} onChange={this.handleChange}/><br/>
                 </div>
               </div>
               <div className="form-group row" style={{marginBottom: '-12px'}}>
                 <label htmlFor="storageWidth" className="col-sm-5 col-form-label">Storage Width: </label>
                 <div className="col-sm-5">
-                  <input name="storageWidth" className="form-control" type="number" value={this.state.storageWidth} onChange={this.handleChange}/><br/>
+                  <input name="storageWidth" className="form-control" type="number" value={this.state.modules['Private Office'].storageWidth} onChange={this.handleChange}/><br/>
                 </div>
               </div>
               <div className="form-group row" style={{marginBottom: '-12px'}}>
                 <label htmlFor="storage" className="col-sm-5 col-form-label">Storage: </label>
                 <div className="col-sm-5">
-                  <input name="storage" className="form-check-label" type="checkbox" value={this.state.storage} onChange={this.handleChange}/>
+                  <input name="storage" className="form-check-label" type="checkbox" value={this.state.modules['Private Office'].storage} onChange={this.handleChange}/>
                 </div>
               </div>
             </form>
@@ -138,9 +151,10 @@ class App extends React.Component {
             width={this.state.width}
           />
         </div>
+        <CustomDragLayer/>
       </div>
     )
   }
 }
 
-export default App;
+export default DragDropContext(HTML5Backend)(App);

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { DragSource } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend'
 import PrivateOffice from './PrivateOffice'
+import ConferenceRoom from './ConferenceRoom'
 import ItemTypes from './ItemTypes'
 
 const moduleSource = {

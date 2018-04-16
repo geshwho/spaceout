@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import PrivateOffice from './PrivateOffice'
+import ConferenceRoom from './ConferenceRoom'
 import Area from './Area'
 import ModuleDrag from './ModuleDrag'
 import CustomDragLayer from './CustomDragLayer'
@@ -28,6 +29,9 @@ class App extends React.Component {
           storage: 0,
           height: 118,
           width: 120
+        },
+        'Conference Room': {
+          name: ConferenceRoom,
         }
       },
       currentModule: 'Private Office',
@@ -44,15 +48,16 @@ class App extends React.Component {
     this.setHeight = this.setHeight.bind(this);
     this.setWidth = this.setWidth.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.setCurrentModule = this.setCurrentModule.bind(this);
   }
 
   setHeight(height) {
     this.setState({ height: height })
-  }
+  };
 
   setWidth(width) {
     this.setState({ width: width })
-  }
+  };
 
   handleChange(e) {
     const target = e.target;
@@ -82,10 +87,15 @@ class App extends React.Component {
     });
   }
 
+  setCurrentModule(mod) {
+    this.setState({ currentModule: mod })
+  }
+
   render() {
     const modules = Object.keys(this.state.modules).map((mod, i) =>
-      <div key={i} className="cursor-pointer"><ModuleDrag name={this.state.modules[`${mod}`].name} human_name={mod} {...this.state.modules[`${mod}`]}/></div>
+      <div key={i} className="cursor-pointer" onClick={() => this.setCurrentModule(mod)}><ModuleDrag name={this.state.modules[`${mod}`].name} human_name={mod} {...this.state.modules[`${mod}`]}/></div>
     );
+    const currentModule = this.state.modules[this.state.currentModule];
     return (
       <div className="container mt-5">
         <div className="row mb-5">
@@ -93,10 +103,10 @@ class App extends React.Component {
             {modules}
           </div>
           <div className="col-sm-4 pt-4">
-            <PrivateOffice
+            <currentModule.name
               setHeight={this.setHeight}
               setWidth={this.setWidth}
-              {...this.state.modules[this.state.currentModule]}
+              {...currentModule}
             />
           </div>
           <div className="col-sm-4">

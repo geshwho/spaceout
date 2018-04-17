@@ -6,10 +6,11 @@ import { getEmptyImage } from 'react-dnd-html5-backend'
 import PrivateOffice from './PrivateOffice'
 import ConferenceRoom from './ConferenceRoom'
 import ItemTypes from './ItemTypes'
+import {getMouseObjectDiff} from './utilities/mouse_position.js'
 
 const moduleSource = {
   beginDrag(props) {
-    const item = {...props}
+    var item = Object.assign({...props}, getMouseObjectDiff(props.human_name))
     return item;
   },
 
@@ -39,10 +40,10 @@ class ModuleDrag extends React.Component {
   }
 
   render() {
-    const { isDragging, connectDragSource } = this.props;
+    const { isDragging, connectDragSource, human_name } = this.props;
     return connectDragSource(
-      <div>
-        <div>{this.props.human_name}</div>
+      <div id={human_name}>
+        {human_name}
       </div>
     )
   }

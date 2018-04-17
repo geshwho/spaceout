@@ -9,12 +9,12 @@ class Area extends React.Component {
     super(props);
 
     this.state = {
-      areaWidth: 600,
-      areaDepth: 118,
+      areaWidth: props.width+props.wallThickness,
+      areaDepth: props.height+props.wallThickness,
       type: {
-        name: this.props.name || PrivateOffice,
-        minWidth: this.props.width || 120,
-        minHeight: this.props.height || 118
+        name: props.name,
+        minWidth: this.props.minWidth,
+        minHeight: this.props.minHeight
       }
     }
 
@@ -38,9 +38,9 @@ class Area extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       type: {
-        name: nextProps.name || PrivateOffice,
-        minWidth: nextProps.width || 120,
-        minHeight: nextProps.height || 118
+        name: nextProps.name,
+        minWidth: nextProps.minWidth,
+        minHeight: nextProps.minHeight
       }
     })
   }
@@ -68,9 +68,9 @@ class Area extends React.Component {
       )
     }
     return (
-        <div className="my-2 mt-5 pt-5 col-sm-12">
+        <svg x={this.props.relX} y={this.props.relY}>
           {modules}
-        </div>
+        </svg>
     )
   }
 }

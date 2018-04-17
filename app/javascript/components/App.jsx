@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import PrivateOffice, {PrivateOfficeDesignParams} from './PrivateOffice'
 import ConferenceRoom, {ConferenceRoomDesignParams} from './ConferenceRoom'
-import Area from './Area'
+import Space from './Space'
 import ModuleDrag from './ModuleDrag'
 import CustomDragLayer from './CustomDragLayer'
 import '../stylesheets/main.css';
@@ -34,6 +34,11 @@ class App extends React.Component {
         'Conference Room': {
           name: ConferenceRoom,
           modparams: ConferenceRoomDesignParams,
+          height: 50,
+          width: 50,
+          minHeight: 50,
+          minWidth: 50,
+          wallThickness: 4.25,
         }
       },
       currentModule: 'Private Office',
@@ -107,16 +112,7 @@ class App extends React.Component {
           <div className="col-sm-4">
             { <DesignParameters handleChange={this.handleChange} {...this.state.modules[this.state.currentModule]}/> }
           </div>
-          <Area
-            deskWidth={this.state.deskWidth}
-            deskDepth={this.state.deskDepth}
-            wallThickness={this.state.wallThickness}
-            storageDepth={this.state.storageDepth}
-            storageWidth={this.state.storageWidth}
-            storage={this.state.storage}
-            height={this.state.height}
-            width={this.state.width}
-          />
+          <Space/>
         </div>
         <CustomDragLayer/>
       </div>

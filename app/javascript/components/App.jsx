@@ -37,14 +37,6 @@ class App extends React.Component {
         }
       },
       currentModule: 'Private Office',
-      deskWidth: 60,
-      deskDepth: 34,
-      wallThickness: 4.25,
-      storageDepth: 12,
-      storageWidth: 72,
-      storage: 0,
-      height: 126.5,
-      width: 128
     }
 
     this.setHeight = this.setHeight.bind(this);

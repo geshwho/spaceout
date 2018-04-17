@@ -12,7 +12,7 @@ class Area extends React.Component {
       areaWidth: 600,
       areaDepth: 118,
       type: {
-        name: PrivateOffice || this.props.name,
+        name: this.props.name || PrivateOffice,
         minWidth: this.props.width || 120,
         minHeight: this.props.height || 118
       }
@@ -38,7 +38,7 @@ class Area extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       type: {
-        name: PrivateOffice,
+        name: nextProps.name || PrivateOffice,
         minWidth: nextProps.width || 120,
         minHeight: nextProps.height || 118
       }

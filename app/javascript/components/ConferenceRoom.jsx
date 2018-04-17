@@ -11,4 +11,14 @@ class ConferenceRoom extends React.Component {
   }
 }
 
+export class ConferenceRoomDesignParams extends React.Component {
+  render() {
+    return(
+      <React.Fragment>
+        <h5 className="mb-5">Design Parameters</h5>
+      </React.Fragment>
+    )
+  }
+}
+
 export default ConferenceRoom;

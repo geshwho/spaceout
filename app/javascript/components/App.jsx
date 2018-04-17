@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import PrivateOffice from './PrivateOffice'
-import ConferenceRoom from './ConferenceRoom'
+import PrivateOffice, {PrivateOfficeDesignParams} from './PrivateOffice'
+import ConferenceRoom, {ConferenceRoomDesignParams} from './ConferenceRoom'
 import Area from './Area'
 import ModuleDrag from './ModuleDrag'
 import CustomDragLayer from './CustomDragLayer'
@@ -19,6 +19,7 @@ class App extends React.Component {
       modules: {
         'Private Office': {
           name: PrivateOffice,
+          modparams: PrivateOfficeDesignParams,
           minWidth: 120,
           minHeight: 118,
           deskWidth: 60,
@@ -32,6 +33,7 @@ class App extends React.Component {
         },
         'Conference Room': {
           name: ConferenceRoom,
+          modparams: ConferenceRoomDesignParams,
         }
       },
       currentModule: 'Private Office',
@@ -95,6 +97,7 @@ class App extends React.Component {
     const modules = Object.keys(this.state.modules).map((mod, i) =>
       <div key={i} className="cursor-pointer" onClick={() => this.setCurrentModule(mod)}><ModuleDrag name={this.state.modules[`${mod}`].name} human_name={mod} {...this.state.modules[`${mod}`]}/></div>
     );
+    const DesignParameters = this.state.modules[this.state.currentModule].modparams
     const currentModule = this.state.modules[this.state.currentModule];
     return (
       <div className="container mt-5">
@@ -110,45 +113,7 @@ class App extends React.Component {
             />
           </div>
           <div className="col-sm-4">
-            <h5 className="mb-5">Design Parameters</h5>
-            <form>
-              <div className="form-group row" style={{marginBottom: '-12px'}}>
-                <label htmlFor="deskWidth" className="col-sm-5 col-form-label">Desk Width: </label>
-                <div className="col-sm-5">
-                  <input name="deskWidth" className="form-control" type="number" value={this.state.modules['Private Office'].deskWidth} onChange={this.handleChange}/><br/>
-                </div>
-              </div>
-              <div className="form-group row" style={{marginBottom: '-12px'}}>
-                <label htmlFor="deskDepth" className="col-sm-5 col-form-label">Desk Depth: </label>
-                <div className="col-sm-5">
-                  <input name="deskDepth" className="form-control" type="number" value={this.state.modules['Private Office'].deskDepth} onChange={this.handleChange}/><br/>
-                </div>
-              </div>
-              <div className="form-group row" style={{marginBottom: '-12px'}}>
-                <label htmlFor="wallThickness" className="col-sm-5 col-form-label">Wall Thickness: </label>
-                <div className="col-sm-5">
-                  <input name="wallThickness" className="form-control" type="number" value={this.state.modules['Private Office'].wallThickness} onChange={this.handleChange}/><br/>
-                </div>
-              </div>
-              <div className="form-group row" style={{marginBottom: '-12px'}}>
-                <label htmlFor="storageDepth" className="col-sm-5 col-form-label">Storage Depth: </label>
-                <div className="col-sm-5">
-                  <input name="storageDepth" className="form-control" type="number" value={this.state.modules['Private Office'].storageDepth} onChange={this.handleChange}/><br/>
-                </div>
-              </div>
-              <div className="form-group row" style={{marginBottom: '-12px'}}>
-                <label htmlFor="storageWidth" className="col-sm-5 col-form-label">Storage Width: </label>
-                <div className="col-sm-5">
-                  <input name="storageWidth" className="form-control" type="number" value={this.state.modules['Private Office'].storageWidth} onChange={this.handleChange}/><br/>
-                </div>
-              </div>
-              <div className="form-group row" style={{marginBottom: '-12px'}}>
-                <label htmlFor="storage" className="col-sm-5 col-form-label">Storage: </label>
-                <div className="col-sm-5">
-                  <input name="storage" className="form-check-label" type="checkbox" value={this.state.modules['Private Office'].storage} onChange={this.handleChange}/>
-                </div>
-              </div>
-            </form>
+            { <DesignParameters handleChange={this.handleChange} {...this.state.modules[this.state.currentModule]}/> }
           </div>
           <Area
             deskWidth={this.state.deskWidth}

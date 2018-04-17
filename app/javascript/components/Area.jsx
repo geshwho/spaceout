@@ -9,12 +9,12 @@ class Area extends React.Component {
     super(props);
 
     this.state = {
-      areaWidth: props.width+props.wallThickness,
-      areaDepth: props.height+props.wallThickness,
+      areaWidth: props.width+2*props.wallThickness,
+      areaDepth: props.height+2*props.wallThickness,
       type: {
         name: props.name,
-        minWidth: this.props.minWidth,
-        minHeight: this.props.minHeight
+        minWidth: props.width,
+        minHeight: props.height
       }
     }
 
@@ -46,29 +46,23 @@ class Area extends React.Component {
   }
 
   render() {
-    let across = Math.floor((this.state.areaWidth)/(this.state.type.minWidth+this.props.wallThickness));
-    let width = (this.state.areaWidth-(across)*this.props.wallThickness)/across;
+    let across = Math.floor((this.state.areaWidth-this.props.wallThickness)/(this.state.type.minWidth+this.props.wallThickness));
+    let width = (this.state.areaWidth-this.props.wallThickness-(across)*this.props.wallThickness)/across;
     let height = this.state.type.minHeight;
-    var modules = []
+    var modules = [];
     for(var i = 0; i < across; i++) {
       modules.push(
         <this.state.type.name
           key={i}
-          height={height}
-          width={width}
-          deskWidth={this.props.deskWidth}
-          deskDepth={this.props.deskDepth}
-          wallThickness={this.props.wallThickness}
-          storageDepth={this.props.storageDepth}
-          storageWidth={this.props.storageWidth}
-          storage={this.props.storage}
+          {...this.props}
           height={height}
           width={width}
         />
       )
     }
-    return (
-        <svg x={this.props.relX} y={this.props.relY} style={{overflow: 'visible'}}>
+    const { isDragging, connectDragSource } = this.props;
+    return(
+        <svg className="cursor-pointer" x={this.props.relX} y={this.props.relY} style={{overflow: 'visible'}}>
           {modules}
         </svg>
     )

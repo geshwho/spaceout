@@ -68,7 +68,7 @@ class Area extends React.Component {
       )
     }
     return (
-        <svg x={this.props.relX} y={this.props.relY}>
+        <svg x={this.props.relX} y={this.props.relY} style={{overflow: 'visible'}}>
           {modules}
         </svg>
     )

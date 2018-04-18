@@ -1,4 +1,4 @@
-function getMousePosition() {
+export function getMousePosition() {
   const e = window.event
   var mouseX = e.pageX;
   var mouseY = e.pageY;

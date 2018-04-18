@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import PrivateOffice from './PrivateOffice'
+import DraggableBits from './DraggableBits'
 import Background from '../images/Demo_Background.png'
 
 class Area extends React.Component {
@@ -37,6 +38,8 @@ class Area extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
+      areaWidth: nextProps.width < nextProps.minWidth+2*nextProps.wallThickness ? nextProps.minWidth+2*nextProps.wallThickness : nextProps.width,
+      areaDepth: nextProps.height < nextProps.minHeight+2*nextProps.wallThickness ? nextProps.minHeight+2*nextProps.wallThickness : nextProps.height,
       type: {
         name: nextProps.name,
         minWidth: nextProps.minWidth,
@@ -62,9 +65,12 @@ class Area extends React.Component {
     }
     const { isDragging, connectDragSource } = this.props;
     return(
+      <React.Fragment>
         <svg className="cursor-pointer" x={this.props.relX} y={this.props.relY} style={{overflow: 'visible'}}>
           {modules}
         </svg>
+        <DraggableBits areaKey={this.props.areaKey} x={this.props.relX} y={this.props.relY} width={this.state.areaWidth} height={this.state.areaDepth} moveHandler={this.props.moveHandler}/>
+      </React.Fragment>
     )
   }
 }

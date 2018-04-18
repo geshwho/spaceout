@@ -8,7 +8,7 @@ import ModuleDrag from './ModuleDrag'
 import CustomDragLayer from './CustomDragLayer'
 import '../stylesheets/main.css';
 import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+import MouseBackEnd from 'react-dnd-mouse-backend'
 import update from 'immutability-helper';
 
 class App extends React.Component {
@@ -120,4 +120,4 @@ class App extends React.Component {
   }
 }
 
-export default DragDropContext(HTML5Backend)(App);
+export default DragDropContext(MouseBackEnd)(App);

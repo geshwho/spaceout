@@ -1,3 +1,4 @@
 export default {
-  MODULE: 'module'
+  MODULE: 'module',
+  AREA: 'area'
 };

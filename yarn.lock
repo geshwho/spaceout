@@ -4815,7 +4815,13 @@ react-dnd-html5-backend@^2.6.0:
   dependencies:
     lodash "^4.2.0"
 
-react-dnd@^2.6.0:
+react-dnd-mouse-backend@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/react-dnd-mouse-backend/-/react-dnd-mouse-backend-0.1.1.tgz#04c3095a630ce31c0d62fb668b10e87836cfaa7e"
+  dependencies:
+    react-dnd "^2.1.2"
+
+react-dnd@^2.1.2, react-dnd@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/react-dnd/-/react-dnd-2.6.0.tgz#7fa25676cf827d58a891293e3c1ab59da002545a"
   dependencies:

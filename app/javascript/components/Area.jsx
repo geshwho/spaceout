@@ -50,7 +50,7 @@ class Area extends React.Component {
 
   render() {
     let across = Math.floor((this.state.areaWidth-this.props.wallThickness)/(this.state.type.minWidth+this.props.wallThickness));
-    let width = (this.state.areaWidth-this.props.wallThickness-(across)*this.props.wallThickness)/across;
+    let width = (this.state.areaWidth-(across+1)*this.props.wallThickness)/across;
     let height = this.state.type.minHeight;
     var modules = [];
     for(var i = 0; i < across; i++) {
@@ -60,6 +60,9 @@ class Area extends React.Component {
           {...this.props}
           height={height}
           width={width}
+          x={(this.props.wallThickness+width)*i}
+          leftWall={i==0}
+          rightWall={i==across-1}
         />
       )
     }

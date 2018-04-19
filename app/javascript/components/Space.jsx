@@ -5,14 +5,16 @@ import { DropTarget } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import Area from './Area'
 import {getMouseObjectDiff} from './utilities/mouse_position.js'
+import snapToGrid from './utilities/snap_to_grid.js'
 import update from 'immutability-helper';
 
 const moduleDrop = {
   drop(props, monitor, component) {
     const item = monitor.getItem();
     const {relX, relY} = getMouseObjectDiff('canvas');
-    item.relX = relX-item.relX;
-    item.relY = relY-item.relY;
+    const [snappedX, snappedY] = snapToGrid(relX-item.relX, relY-item.relY);
+    item.relX = snappedX;
+    item.relY = snappedY;
     item.areaKey = Math.random().toString(36).substr(2, 9);
     component.addArea(item);
   }
@@ -80,11 +82,13 @@ class Space extends React.Component {
         newRelY = areas[index].relY + yDiff;
         break;
     }
+    const [snappedRelX, snappedRelY] = snapToGrid(newRelX, newRelY);
+    const [snappedHeight, snappedWidth] = snapToGrid(newHeight, newWidth);
     const newArea = update(this.state.areas[index], {
-      relX: {$set: newRelX},
-      relY: {$set: newRelY},
-      height: {$set: newHeight},
-      width: {$set: newWidth}
+      relX: {$set: snappedRelX},
+      relY: {$set: snappedRelY},
+      height: {$set: snappedHeight-snappedRelY},
+      width: {$set: snappedWidth-snappedRelX}
     })
     this.setState(prevState => ({areas: prevState.areas.filter(x => x.areaKey != areaKey).concat([newArea])}));
   }

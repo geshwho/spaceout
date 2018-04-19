@@ -52,7 +52,7 @@ class PrivateOffice extends React.Component {
     let Height = this.state.height;
     let viewbox = this.props.setWidth ? {['viewBox']: `0 0 ${(Width+2*off.wallThickness)/2} ${(Height+2*off.wallThickness)/2}`} : {}
     return(
-      <svg height={Height+2*off.wallThickness} width={Width + off.wallThickness} style={{overflow: 'visible'}} {...viewbox}>
+      <svg x={this.props.x} height={Height+2*off.wallThickness} width={Width + off.wallThickness} style={{overflow: 'visible'}} {...viewbox}>
         <path d={`M 0 0
           ${off.leftWall ? 'L' : 'M'} 0 ${Height+2*off.wallThickness}
           ${off.leftWall ? 'L' : 'M'} ${off.wallThickness} ${Height+2*off.wallThickness}

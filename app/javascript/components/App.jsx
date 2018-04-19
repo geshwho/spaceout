@@ -78,7 +78,9 @@ class App extends React.Component {
           modules: {
             [this.state.currentModule]: {
               height: { $set: (modprops.storageWidth > 84 + modprops.deskDepth ? modprops.storageWidth : 84 + modprops.deskDepth) },
-              width: { $set: 60 + modprops.deskWidth + modprops.storage*modprops.storageDepth }
+              width: { $set: 60 + modprops.deskWidth + modprops.storage*modprops.storageDepth },
+              minWidth: { $set: 60 + modprops.deskWidth + modprops.storage*modprops.storageDepth },
+              minHeight: { $set: (modprops.storageWidth > 84 + modprops.deskDepth ? modprops.storageWidth : 84 + modprops.deskDepth) },
             }
           }
         });

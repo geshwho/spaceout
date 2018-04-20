@@ -5,6 +5,7 @@ import { DropTarget } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 import Area from './Area'
 import {getMouseObjectDiff} from './utilities/mouse_position.js'
+import {newAreaValid, changeAreaValid} from './utilities/area_validity.js'
 import snapToGrid from './utilities/snap_to_grid.js'
 import update from 'immutability-helper';
 
@@ -82,18 +83,19 @@ class Space extends React.Component {
         newRelY = areas[index].relY + yDiff;
         break;
     }
-    const [snappedRelX, snappedRelY] = snapToGrid(newRelX, newRelY);
-    const [snappedHeight, snappedWidth] = snapToGrid(newHeight, newWidth);
+    const [snappedRelX, snappedRelY, snappedWidth, snappedHeight] = snapToGrid(newRelX, newRelY, newWidth, newHeight);
     const newArea = update(this.state.areas[index], {
       relX: {$set: snappedRelX},
       relY: {$set: snappedRelY},
-      height: {$set: snappedHeight-snappedRelY},
-      width: {$set: snappedWidth-snappedRelX}
+      height: {$set: snappedHeight},
+      width: {$set: snappedWidth}
     })
+    //if(!changeAreaValid(this.state.areas, newArea)){return false}
     this.setState(prevState => ({areas: prevState.areas.filter(x => x.areaKey != areaKey).concat([newArea])}));
   }
 
   addArea(item) {
+    //if(!newAreaValid(this.state.areas, item)){return false}
     const newAreas = update(this.state.areas, { $push: [{...item}] })
     this.setState({ areas: newAreas })
   }

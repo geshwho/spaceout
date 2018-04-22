@@ -50,8 +50,9 @@ class PrivateOffice extends React.Component {
     let off = this.state;
     let Width = this.state.width;
     let Height = this.state.height;
+    let viewbox = this.props.setWidth ? {['viewBox']: `0 0 ${(Width+2*off.wallThickness)/2} ${(Height+2*off.wallThickness)/2}`} : {}
     return(
-      <svg height={Height+2*off.wallThickness} width={Width + off.wallThickness} style={{overflow: 'visible'}} viewBox={this.props.setWidth ? `0 0 ${(Width+2*off.wallThickness)/2} ${(Height+2*off.wallThickness)/2}` : ''}>
+      <svg x={this.props.x} height={Height+2*off.wallThickness} width={Width + off.wallThickness} style={{overflow: 'visible'}} {...viewbox}>
         <path d={`M 0 0
           ${off.leftWall ? 'L' : 'M'} 0 ${Height+2*off.wallThickness}
           ${off.leftWall ? 'L' : 'M'} ${off.wallThickness} ${Height+2*off.wallThickness}
@@ -116,5 +117,53 @@ const Clearances = props => (
     <Dimension x1={props.doorSize+props.wallThickness+30} x2={props.doorSize+props.wallThickness+30} y1={48+props.deskDepth+props.wallThickness} y2={props.height+props.wallThickness} text="Clearance"/>
   </g>
 )
+
+export class PrivateOfficeDesignParams extends React.Component {
+  render() {
+    return(
+      <React.Fragment>
+        <h5 className="mb-5">Design Parameters</h5>
+        <form>
+          <div className="form-group row" style={{marginBottom: '-12px'}}>
+            <label htmlFor="deskWidth" className="col-sm-5 col-form-label">Desk Width: </label>
+            <div className="col-sm-5">
+              <input name="deskWidth" className="form-control" type="number" value={this.props.deskWidth} onChange={this.props.handleChange}/><br/>
+            </div>
+          </div>
+          <div className="form-group row" style={{marginBottom: '-12px'}}>
+            <label htmlFor="deskDepth" className="col-sm-5 col-form-label">Desk Depth: </label>
+            <div className="col-sm-5">
+              <input name="deskDepth" className="form-control" type="number" value={this.props.deskDepth} onChange={this.props.handleChange}/><br/>
+            </div>
+          </div>
+          <div className="form-group row" style={{marginBottom: '-12px'}}>
+            <label htmlFor="wallThickness" className="col-sm-5 col-form-label">Wall Thickness: </label>
+            <div className="col-sm-5">
+              <input name="wallThickness" className="form-control" type="number" value={this.props.wallThickness} onChange={this.props.handleChange}/><br/>
+            </div>
+          </div>
+          <div className="form-group row" style={{marginBottom: '-12px'}}>
+            <label htmlFor="storageDepth" className="col-sm-5 col-form-label">Storage Depth: </label>
+            <div className="col-sm-5">
+              <input name="storageDepth" className="form-control" type="number" value={this.props.storageDepth} onChange={this.props.handleChange}/><br/>
+            </div>
+          </div>
+          <div className="form-group row" style={{marginBottom: '-12px'}}>
+            <label htmlFor="storageWidth" className="col-sm-5 col-form-label">Storage Width: </label>
+            <div className="col-sm-5">
+              <input name="storageWidth" className="form-control" type="number" value={this.props.storageWidth} onChange={this.props.handleChange}/><br/>
+            </div>
+          </div>
+          <div className="form-group row" style={{marginBottom: '-12px'}}>
+            <label htmlFor="storage" className="col-sm-5 col-form-label">Storage: </label>
+            <div className="col-sm-5">
+              <input name="storage" className="form-check-label" type="checkbox" value={this.props.storage} onChange={this.props.handleChange}/>
+            </div>
+          </div>
+        </form>
+      </React.Fragment>
+    )
+  }
+}
 
 export default PrivateOffice;

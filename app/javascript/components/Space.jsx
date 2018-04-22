@@ -90,12 +90,12 @@ class Space extends React.Component {
       height: {$set: snappedHeight},
       width: {$set: snappedWidth}
     })
-    //if(!changeAreaValid(this.state.areas, newArea)){return false}
+    if(!changeAreaValid(this.state.areas, newArea)){return false}
     this.setState(prevState => ({areas: prevState.areas.filter(x => x.areaKey != areaKey).concat([newArea])}));
   }
 
   addArea(item) {
-    //if(!newAreaValid(this.state.areas, item)){return false}
+    if(!newAreaValid(this.state.areas, item)){return false}
     const newAreas = update(this.state.areas, { $push: [{...item}] })
     this.setState({ areas: newAreas })
   }

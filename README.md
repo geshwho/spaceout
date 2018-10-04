@@ -6,7 +6,7 @@ Just for **_fun_** application that ended up being entirely react, and no ruby/r
 
 Maybe not much 😂, but my wife is an architect and this is what constitutes fun in our household! The application (while incomplete) provides a barebones way to layout an office space with different components (private office, conference room, etc.) while automatically taking into account some "best design practices" like how much clearance is needed between a desk and a wall in order for people to comfortably move about the room.
 
-###Running this:
+### Running this:
 * I used ruby-2.5.0
 * It doesn't work on newer versions of node (I think < 9)
 * You should be able to:

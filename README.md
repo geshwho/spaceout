@@ -20,6 +20,7 @@ The **top of the page** consists of 3 sections:
 * **Left:**   List of components
 * **Middle:** Preview of the component
 * **Right:**  Design Parameters that affect the preview
+
 Once you're satisfied with the preview, you can _drag the name_ of the component from the left to the bottom section of the page. The application will drop the component (with some "snap to grid" effects) according to what you have in the design parameters. There is some basic "clash detection" to prevent multple components in the same space.
 ![Top of Page](doc/top.png)
 

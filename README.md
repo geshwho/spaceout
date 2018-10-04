@@ -21,12 +21,15 @@ The **top of the page** consists of 3 sections:
 * **Middle:** Preview of the component
 * **Right:**  Design Parameters that affect the preview
 Once you're satisfied with the preview, you can _drag the name_ of the component from the left to the bottom section of the page. The application will drop the component (with some "snap to grid" effects) according to what you have in the design parameters. There is some basic "clash detection" to prevent multple components in the same space.
-(Top of Page)[doc/top.png]
+![Top of Page](doc/top.png)
 
 The **bottom of the page** is just once big empty box. But it can be populated with components from the top section. Once a component has been dropped in, you can move it around, or resize the `Area` by click and drag. You can create a row of components (like a row of private offices) by expanding the `Area` to be wide enough to accomodate two.
 
 The example image below shows this with two differently designed components, that as a result of the differences fill a different number of components in.
-(Bottom of Page)[doc/bottom.png]
+![Bottom of Page](doc/bottom.png)
+
+### Components
+The things I've been calling components are React Components, that use svg to draw _stuff_ based on design parameters (`props`)
 
 ## Issues/Incomplete Things
 
